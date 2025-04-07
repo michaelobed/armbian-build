@@ -17,31 +17,16 @@ LINUXFAMILY=$2
 BOARD=$3
 BUILD_DESKTOP=$4
 
-Main() {
-	case $RELEASE in
-		stretch)
-			# your code here
-			# InstallOpenMediaVault # uncomment to get an OMV 4 image
-			;;
-		buster)
-			# your code here
-			;;
-		bullseye)
-			# your code here
-			;;
-		bionic)
-			# your code here
-			;;
-		focal)
-			# your code here
-			;;
-	esac
-
+Main()
+{
 	# Copy smolsynth3 files to root.
 	# We should probably do this in a more secure way, but this is fine for now as proof-of-concept.
 	cp -r /tmp/overlay/smolsynth3 /
 
-} # Main
+	# Get portaudio and portmidi
+	apt-get update
+	apt-get -y install libportaudio2 libportmidi0
+}
 
 InstallOpenMediaVault() {
 	# use this routine to create a Debian based fully functional OpenMediaVault
