@@ -23,9 +23,15 @@ Main()
 	# We should probably do this in a more secure way, but this is fine for now as proof-of-concept.
 	cp -r /tmp/overlay/smolsynth3 /
 
-	# Get libsndfile, portaudio and portmidi
+	# Get libsndfile, portaudio and portmidi.
 	apt-get update
 	apt-get -y install libsndfile1 libportaudio2 libportmidi0
+
+	# Compile and activate device tree overlays.
+	for dts in /tmp/overlay/dts/*
+	do
+		armbian-add-overlay $dts
+	done
 }
 
 InstallOpenMediaVault() {
