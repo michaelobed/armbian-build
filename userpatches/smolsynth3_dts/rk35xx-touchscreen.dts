@@ -1,46 +1,78 @@
 /dts-v1/;
 /plugin/;
 
-// #include "rk3566-orangepi-3b.dtsi"
+#include <dt-bindings/soc/rockchip,vop2.h>
+#include <dt-bindings/clock/rk3568-cru.h>
 
 / {
-
 	compatible = "rockchip,rk3566";
 
-    // fragment@0 {
-	// 	target = <&dsi1>;
+	fragment@0 {
+		target = <&hdmi>;
 
-	// 	__overlay__ {
-	// 		status = "okay";
-	// 	};
-	// };
+		__overlay__ {
+			status = "disabled";
+		};
+	};
 
-    // fragment@1 {
-	// 	target = <&dsi1_out>;
-
-	// 	__overlay__ {
-	// 		status = "okay";
-	// 	};
-	// };
-
-    // fragment@2 {
-	// 	target = <&dsi_dphy1>;
-
-	// 	__overlay__ {
-	// 		status = "okay";
-	// 	};
-	// };
-
-    // fragment@3 {
-	// 	target = <&vop_mmu>;
-
-	// 	__overlay__ {
-	// 		status = "okay";
-	// 	};
-	// };
-
-    fragment@0 {
+	fragment@1 {
 		target = <&i2c1>;
+
+		__overlay__ {
+			status = "okay";
+		};
+	};
+
+	fragment@2 {
+		target = <&vop>;
+
+		__overlay__ {
+			assigned-clocks = <&cru DCLK_VOP0>;
+			assigned-clock-parents = <&pmucru PLL_HPLL>, <&cru PLL_VPLL>;
+			status = "okay";
+		};
+	};
+
+	fragment@3 {
+		target = <&vop_mmu>;
+
+		__overlay__ {
+			status = "okay";
+		};
+	};
+
+	fragment@4 {
+		target = <&dsi1>;
+
+		__overlay__ {
+			status = "okay";
+		};
+	};
+
+	fragment@5 {
+		target = <&dsi1_in>;
+
+		__overlay__ {
+			dsi1_in_vp0: endpoint@0 {
+				reg = <0>;
+				remote-endpoint = <&vp0_out_dsi1>;
+			};
+		};
+	};
+
+	fragment@6 {
+		target = <&vp0>;
+
+		__overlay__ {
+			vp0_out_dsi1: endpoint@ROCKCHIP_VOP2_EP_MIPI1 {
+				reg = <ROCKCHIP_VOP2_EP_MIPI1>;
+				remote-endpoint = <&dsi1_in_vp0>;
+			};
+		};
+	};
+
+	fragment@7 {
+		target = <&dsi_dphy1>;
 
 		__overlay__ {
 			status = "okay";
