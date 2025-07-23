@@ -8,14 +8,6 @@
 	compatible = "rockchip,rk3566";
 
 	fragment@0 {
-		target = <&hdmi>;
-
-		__overlay__ {
-			status = "disabled";
-		};
-	};
-
-	fragment@1 {
 		target = <&i2c1>;
 
 		__overlay__ {
@@ -23,33 +15,37 @@
 		};
 	};
 
-	fragment@2 {
-		target = <&vop>;
-
-		__overlay__ {
-			assigned-clocks = <&cru DCLK_VOP0>;
-			assigned-clock-parents = <&pmucru PLL_HPLL>, <&cru PLL_VPLL>;
-			status = "okay";
-		};
-	};
-
-	fragment@3 {
-		target = <&vop_mmu>;
-
-		__overlay__ {
-			status = "okay";
-		};
-	};
-
-	fragment@4 {
+	fragment@1 {
 		target = <&dsi1>;
 
 		__overlay__ {
 			status = "okay";
+
+			port {
+				mipi_out: port@1 {
+					reg = <1>;
+
+					mipi_out_panel: endpoint {
+						remote-endpoint = <&mipi_in_panel>;
+					};
+				};
+			};
+
+			mipi_panel: panel@0 {
+				compatible = "panel-dsi-simple";
+				reg = <0>;
+				status = "okay";
+
+				port {
+					mipi_in_panel: endpoint {
+						remote-endpoint = <&mipi_out_panel>;
+					};
+				};
+			};
 		};
 	};
 
-	fragment@5 {
+	fragment@2 {
 		target = <&dsi1_in>;
 
 		__overlay__ {
@@ -60,7 +56,7 @@
 		};
 	};
 
-	fragment@6 {
+	fragment@3 {
 		target = <&vp0>;
 
 		__overlay__ {
@@ -71,11 +67,52 @@
 		};
 	};
 
-	fragment@7 {
+	fragment@4 {
+		target = <&dsi_dphy0>;
+
+		__overlay__ {
+			status = "okay";
+		};
+	};
+
+	fragment@5 {
 		target = <&dsi_dphy1>;
 
 		__overlay__ {
 			status = "okay";
+		};
+	};
+
+	/* Disable all HDMI things. */
+	fragment@6 {
+		target = <&hdmi>;
+
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@7 {
+		target = <&hdmi_in>;
+
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@8 {
+		target = <&hdmi_out>;
+
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@9 {
+		target = <&hdmi_sound>;
+
+		__overlay__ {
+			status = "disabled";
 		};
 	};
 };
