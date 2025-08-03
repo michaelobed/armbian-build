@@ -18,7 +18,6 @@
 			mipi_panel: panel@45 {
 				compatible = "raspberrypi,7inch-touchscreen-panel";
 				reg = <45>;
-				gpio-controller;
 				status = "okay";
 
 				port {
