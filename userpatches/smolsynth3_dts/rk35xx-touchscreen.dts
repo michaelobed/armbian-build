@@ -17,7 +17,7 @@
 			 * device at address 0x45 during rpi_touchscreen_probe(). */
 			mipi_panel: panel@45 {
 				compatible = "raspberrypi,7inch-touchscreen-panel";
-				reg = <45>;
+				reg = <0x45>;
 				status = "okay";
 
 				port {
