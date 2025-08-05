@@ -70,14 +70,6 @@
 	};
 
 	fragment@4 {
-		target = <&dsi_dphy0>;
-
-		__overlay__ {
-			status = "okay";
-		};
-	};
-
-	fragment@5 {
 		target = <&dsi_dphy1>;
 
 		__overlay__ {
@@ -86,7 +78,7 @@
 	};
 
 	/* Disable all HDMI things. */
-	fragment@6 {
+	fragment@5 {
 		target = <&hdmi>;
 
 		__overlay__ {
@@ -94,7 +86,7 @@
 		};
 	};
 
-	fragment@7 {
+	fragment@6 {
 		target = <&hdmi_in>;
 
 		__overlay__ {
@@ -102,7 +94,7 @@
 		};
 	};
 
-	fragment@8 {
+	fragment@7 {
 		target = <&hdmi_out>;
 
 		__overlay__ {
@@ -110,7 +102,7 @@
 		};
 	};
 
-	fragment@9 {
+	fragment@8 {
 		target = <&hdmi_sound>;
 
 		__overlay__ {
