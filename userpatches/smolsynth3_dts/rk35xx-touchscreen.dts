@@ -34,16 +34,6 @@
 
 		__overlay__ {
 			status = "okay";
-
-			port {              
-				mipi_out: port@1 {
-					reg = <1>;
-
-					mipi_out_panel: endpoint {
-						remote-endpoint = <&mipi_in_panel>;
-					};
-				};
-			};
 		};
 	};
 
@@ -52,13 +42,22 @@
 
 		__overlay__ {
 			dsi1_in_vp0: endpoint {
-				reg = <1>;
 				remote-endpoint = <&vp0_out_dsi1>;
 			};
 		};
 	};
 
 	fragment@3 {
+		target = <&dsi1_out>;
+
+		__overlay__ {
+			mipi_out_panel: endpoint {
+				remote-endpoint = <&mipi_in_panel>;
+			};
+		};
+	};
+
+	fragment@4 {
 		target = <&vp0>;
 
 		__overlay__ {
@@ -69,7 +68,7 @@
 		};
 	};
 
-	fragment@4 {
+	fragment@5 {
 		target = <&dsi_dphy1>;
 
 		__overlay__ {
@@ -78,7 +77,7 @@
 	};
 
 	/* Disable all HDMI things. */
-	fragment@5 {
+	fragment@6 {
 		target = <&hdmi>;
 
 		__overlay__ {
@@ -86,7 +85,7 @@
 		};
 	};
 
-	fragment@6 {
+	fragment@7 {
 		target = <&hdmi_in>;
 
 		__overlay__ {
@@ -94,7 +93,7 @@
 		};
 	};
 
-	fragment@7 {
+	fragment@8 {
 		target = <&hdmi_out>;
 
 		__overlay__ {
@@ -102,7 +101,7 @@
 		};
 	};
 
-	fragment@8 {
+	fragment@9 {
 		target = <&hdmi_sound>;
 
 		__overlay__ {
