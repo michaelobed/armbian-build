@@ -86,22 +86,6 @@
 	};
 
 	fragment@7 {
-		target = <&hdmi_in>;
-
-		__overlay__ {
-			status = "disabled";
-		};
-	};
-
-	fragment@8 {
-		target = <&hdmi_out>;
-
-		__overlay__ {
-			status = "disabled";
-		};
-	};
-
-	fragment@9 {
 		target = <&hdmi_sound>;
 
 		__overlay__ {
