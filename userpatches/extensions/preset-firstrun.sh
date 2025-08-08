@@ -32,8 +32,8 @@ function post_family_tweaks__preset_configs() {
 	# Set SET_LANG_BASED_ON_LOCATION=n if you want to choose "Set user language based on your location?" with "n" at first login
 	echo "SET_LANG_BASED_ON_LOCATION=n" >> "${SDCARD}"/root/.not_logged_in_yet
 
-	# Preset default locale
-	echo "PRESET_LOCALE=en_GB.UTF-8" >> "${SDCARD}"/root/.not_logged_in_yet
+	# Preset locale to the one generated in customise-image.sh.
+	echo "PRESET_LOCALE=*Skip*" >> "${SDCARD}"/root/.not_logged_in_yet
 
 	# Preset timezone
 	echo "PRESET_TIMEZONE=Etc/UTC" >> "${SDCARD}"/root/.not_logged_in_yet

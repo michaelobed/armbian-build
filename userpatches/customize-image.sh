@@ -23,7 +23,7 @@ Main()
 	# We should probably do this in a more secure way, but this is fine for now as proof-of-concept.
 	cp -r /tmp/overlay/smolsynth3 /
 
-	# Get libsndfile, portaudio and portmidi.
+	# Get required smolsynth3 libs.
 	apt-get update
 	apt-get -y install libsndfile1 libportaudio2 libportmidi0
 
@@ -32,6 +32,9 @@ Main()
 	do
 		armbian-add-overlay $dts
 	done
+
+	# Generate US locale here so we don't worry about it on first boot.
+	locale-gen en_US.UTF-8
 }
 
 InstallOpenMediaVault() {
