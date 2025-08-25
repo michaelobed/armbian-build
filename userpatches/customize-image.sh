@@ -31,6 +31,10 @@ Main()
 	for dts in /tmp/overlay/dts/*
 	do
 		armbian-add-overlay $dts
+		if [ $? -ne 0 ]
+		then
+			exit 1
+		fi
 	done
 
 	# Generate US locale here so we don't worry about it on first boot.
