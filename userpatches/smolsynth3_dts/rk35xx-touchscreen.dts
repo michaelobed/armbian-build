@@ -15,7 +15,7 @@
 
 			/* panel-raspberrypi-touchscreen will attempt to read register 0x80 of the
 			 * device at address 0x45 during rpi_touchscreen_probe(). */
-			mipi_panel: panel@45 {
+			mipi_panel: raspits-panel@45 {
 				compatible = "raspberrypi,7inch-touchscreen-panel";
 				reg = <0x45>;
 				status = "okay";
@@ -25,6 +25,12 @@
 						remote-endpoint = <&mipi_out_panel>;
 					};
 				};
+			};
+
+			mipi_panel_touch: raspits-touch-ft5426@38 {
+				compatible = "raspits_ft5426";
+				reg = <0x38>;
+				status = "okay";
 			};
 		};
 	};
@@ -87,6 +93,14 @@
 
 	fragment@7 {
 		target = <&hdmi_sound>;
+
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@8 {
+		target = <&vp0_out_hdmi>;
 
 		__overlay__ {
 			status = "disabled";
